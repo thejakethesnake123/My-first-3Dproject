@@ -4,7 +4,7 @@ public class ObjectGrabbable : MonoBehaviour
 {
     private Rigidbody objectRigidbody;
     private Transform objectGrabPointTransform;
-
+    bool _destroytrash = false;
     private void Awake()
     {
         objectRigidbody = GetComponent<Rigidbody>();
@@ -14,6 +14,19 @@ public class ObjectGrabbable : MonoBehaviour
         this.objectGrabPointTransform = objectGrabPointTransform;
         objectRigidbody.useGravity = false;
         objectRigidbody.isKinematic = true;
+    }
+
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+        if (_destroytrash == true)
+        {
+           Destroy(gameObject);
+        }
     }
 
     public void Drop()
@@ -31,5 +44,27 @@ public class ObjectGrabbable : MonoBehaviour
             objectRigidbody.MovePosition(newPosition);
         }
 
-    }      
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "trashcan")
+        {
+
+            {
+                _destroytrash = true;
+            }
+        }
+
+        void OnCollisionExit(Collision collision)
+        {
+            if (collision.gameObject.tag == "trashcan")
+            {
+                Debug.Log("Exit");
+            }
+        }
+
+
+
+    }
 }
