@@ -6,6 +6,7 @@ TagManager:
   tags:
   - trashcan2
   - trashcan
+  - ScoreText
   layers:
   - Default
   - TransparentFX

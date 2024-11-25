@@ -4,7 +4,9 @@ public class ObjectGrabbable : MonoBehaviour
 {
     private Rigidbody objectRigidbody;
     private Transform objectGrabPointTransform;
-    bool _destroytrash = false;
+
+  
+    //bool _destroytrash = false;
     private void Awake()
     {
         objectRigidbody = GetComponent<Rigidbody>();
@@ -21,13 +23,13 @@ public class ObjectGrabbable : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (_destroytrash == true)
-        {
-           Destroy(gameObject);
-        }
-    }
+    //void update()
+    //{
+    //    if (_destroytrash == true)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 
     public void Drop()
     {
@@ -46,13 +48,16 @@ public class ObjectGrabbable : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "trashcan")
         {
 
             {
-                _destroytrash = true;
+                Debug.Log("enter");
+                GlobalScore.SCORE += 1;
+                Instantiate(gameObject, new Vector3(0, 0, 0), Quaternion.identity);
+                Destroy(gameObject);
             }
         }
 
